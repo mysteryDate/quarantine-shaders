@@ -1,0 +1,9 @@
+{
+    "editor.minimap.enabled": false,
+    "glsl-canvas.uniformas": {
+        "u_radius": 0.5,
+        "u_test": [1.0, 1.0, 1.0]
+    },
+    "glsl-canvas.refreshOnChange": false,
+    "glsl-canvas.refreshOnSave": true,
+}
