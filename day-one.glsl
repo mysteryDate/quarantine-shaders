@@ -6,7 +6,6 @@ uniform float u_time;
 
 uniform float u_radius;
 
-
 float smin(float a, float b, float k) {
   float h = clamp(0.5+0.5*(b-a)/k, 0.0, 1.0);
   return mix(b, a, h) - k*h*(1.0-h);
@@ -32,9 +31,10 @@ void main() {
     for (float i = 0.0; i < numCircles; i+= 1.0) {
         float a = float(i);
         float tt = t + a * 2.0 * PI/numCircles;
+        vec2 pos = vec2(sin(tt), cos(tt));
         float r = 0.35 * sin(u_time + tt);
         float smallCircle = circleSDF(
-            st - vec2(sin(tt), cos(tt)) * r);
+            st - pos* r);
         smallCircle /= 0.4 * pow(0.9, a);
         finalSDF = smin(finalSDF, smallCircle, 0.4);
     }
