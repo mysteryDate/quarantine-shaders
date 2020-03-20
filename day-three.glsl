@@ -52,23 +52,27 @@ float quarticInOut(float t) {
     : -8.0 * pow(t - 1.0, 4.0) + 1.0;
 }
 
+const vec3 bc1 = vec3(0.372, 0.081, 0.348);
+const vec3 bc2 = vec3(0.999, 0.016, 0.392);
+const vec3 fc1 = vec3(0.2431, 0.5412, 0.9843);
+const vec3 fc2 = vec3(0.0, 0.1569, 0.4941);
 const float duration = 10.0;
 const float NUM_ANIMATION_STEPS = 4.0;
-const vec3 c1 =vec3(0.6196, 0.8627, 0.9059);
-const vec3 c2 =vec3(0.6588, 0.251, 0.8196);
 void main() {
-  float time = mod(u_time / duration, 1.0) * NUM_ANIMATION_STEPS * 2.0;
-  // time = 0.0;
-
-  vec3 fgColor = mix(c1, c2, step(NUM_ANIMATION_STEPS, time));
-  vec3 bgColor = mix(c2, c1, step(NUM_ANIMATION_STEPS, time));
-  time = mod(time, NUM_ANIMATION_STEPS);
-  float c = 0.0;
-
   vec2 st = gl_FragCoord.xy / u_resolution.yy;
   if (u_resolution.x > u_resolution.y)
     st = gl_FragCoord.xy / u_resolution.xx;
 
+  float time = mod(u_time / duration, 1.0) * NUM_ANIMATION_STEPS * 2.0;
+  // time = 0.0;
+
+  vec3 fg = mix(fc1, fc2, length(st));
+  vec3 bg = mix(bc2, bc1, length(st - 1.0));
+
+  vec3 fgColor = mix(fg, bg, step(NUM_ANIMATION_STEPS, time));
+  vec3 bgColor = mix(bg, fg, step(NUM_ANIMATION_STEPS, time));
+  time = mod(time, NUM_ANIMATION_STEPS);
+  float c = 0.0;
   
   float spinTime = 1.8;
   if (stepBetween(time, 0.0, spinTime) > 0.0) {
