@@ -65,19 +65,34 @@ float dancer(vec2 st, float c, float size, float width) {
     return stroke(finalSDF, r, width);
 }
 
+vec2 rotate(vec2 st, float theta) {
+  mat2 rotationMatrix = mat2(cos(theta), -sin(theta), sin(theta), cos(theta));
+  return rotationMatrix * st;
+}
+
+vec2 rotateAboutPoint(vec2 st, float theta, vec2 point) {
+  return rotate(st - point, theta) + point;
+}
+
+float atan2(in float y, in float x) {
+    return x == 0.0 ? sign(y)*PI/2.0 : atan(y, x);
+}
+
 const float duration = 20.0;
 const float total = 15.0;
 void main() {
     vec2 st = gl_FragCoord.xy / u_resolution.xy;
+    vec2 m = u_mouse - 0.5;
+    float a = atan2(m.y, m.x);
+    st = rotateAboutPoint(st, 3.0 * a, vec2(0.5));
     vec3 color = vec3(0.0);
     float numSteps = 8.0;
 
     float colorControl = 0.0;
     for (float i = 0.0; i < total; i += 1.0) {
         float time = mod((u_time - i/5.0) / duration, 1.0);
-        // float time = mod(u_test.x, 1.0);
         float c = time * numSteps;
-        colorControl += dancer(st, c, u_radius, u_test.x/20.0) * (1.0 - i/total);
+        colorControl += dancer(st, c, 0.5, 0.01) * (1.0 - i/total);
     }
 
     float colorClock = sin01((u_time + 2.0) * 2.0 * PI / duration);

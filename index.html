@@ -1,0 +1,34 @@
+  
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Shaders for fun and profit</title>
+    <style type="text/css">
+      * {
+        margin: 0;
+      }
+      canvas {
+        position: absolute;
+      }
+      body {
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+  </body>
+  <script type="text/javascript" src="init_shader.js"></script>
+  <script type="text/javascript">
+    const canvasSize = Math.min(0.8 * window.innerWidth, Math.min(0.8 * window.innerHeight, 1024));
+    const canvas = document.createElement("canvas");
+    canvas.width = canvas.height = canvasSize;
+    document.body.appendChild(canvas);
+    const leftPadding = window.innerWidth / 2 - canvasSize / 2;
+    canvas.style.left = leftPadding + "px";
+    const topPadding = window.innerHeight / 2 - canvasSize / 2;
+    canvas.style.top = topPadding + "px";
+
+    createShaderCanvas(canvas, "../day-two.glsl");
+  </script>
+</html>

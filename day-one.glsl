@@ -19,8 +19,7 @@ float circleSDF(vec2 st) {
 
 void main() {
     vec2 st = gl_FragCoord.xy / u_resolution.xy;
-    // st.x *= u_resolution.x / u_resolution.y;
-    float t = u_time / 3.0;
+    float t = u_time / 3.0 + length(u_mouse);
 
     vec3 color = vec3(0.0);
     color = vec3(st.x, st.y, abs(sin(t * 2.0)));
