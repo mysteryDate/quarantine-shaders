@@ -84,7 +84,7 @@ void main() {
     vec2 st = gl_FragCoord.xy / u_resolution.xy;
     vec2 m = u_mouse - 0.5;
     float a = atan2(m.y, m.x);
-    st = rotateAboutPoint(st, 3.0 * a, vec2(0.5));
+    st = rotateAboutPoint(st, 2.0 * a, vec2(0.5));
     vec3 color = vec3(0.0);
     float numSteps = 8.0;
 

@@ -1,4 +1,3 @@
-  
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -29,6 +28,11 @@
     const topPadding = window.innerHeight / 2 - canvasSize / 2;
     canvas.style.top = topPadding + "px";
 
-    createShaderCanvas(canvas, "../day-two.glsl");
+    var shaderName = "day-one";
+    if (window.location.search)
+      shaderName = window.location.search.split("?")[1]
+    console.log(shaderName);
+    createShaderCanvas(canvas, `../${shaderName}.glsl`);
+
   </script>
 </html>
