@@ -32,7 +32,7 @@
     if (window.location.search)
       shaderName = window.location.search.split("?")[1]
     console.log(shaderName);
-    createShaderCanvas(canvas, `../${shaderName}.glsl`);
+    createShaderCanvas(canvas, `${shaderName}.glsl`);
 
   </script>
 </html>
