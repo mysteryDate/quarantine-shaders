@@ -39,7 +39,6 @@ function init(shadercode) {
     canvas.height);
   gl.uniform2f(gl.getUniformLocation(glProgram, "u_mouse"), 0, 0);
   const texture = loadTexture(gl, 'textures/cait.jpg');
-  console.log(gl.getUniformLocation(glProgram, "u_resolution"));
   gl.drawArrays(6, 0, 3);
 }
 
