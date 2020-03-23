@@ -34,14 +34,14 @@ float smin(float a, float b, float k) {
 const float NUM = 6.0;
 void main() {
   vec2 st = gl_FragCoord.xy / u_resolution.xy;
+  vec2 m = u_mouse;
   float t = u_time / 2.0;
   vec3 color = vec3(0.0);
   vec3 color1 = vec3(st.x, sin01(t * 4.0), st.y);
 
   float finalSDF = 99999.0;
-  float colorControl = 0.0;
+  float colorControl = 0.0 + 2.0 * (u_mouse.x - 0.5);
   float offset = 0.4 * sin(t);
-  float stretch = u_test.x * 2.0;
   for (float i = 0.0; i <= NUM; i += 1.0) {
     float x = 0.5 - offset / NUM * i + offset / 2.0;
     float y = 0.5;
