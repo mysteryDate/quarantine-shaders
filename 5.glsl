@@ -34,7 +34,7 @@ float smin(float a, float b, float k) {
 const float NUM = 6.0;
 void main() {
   vec2 st = gl_FragCoord.xy / u_resolution.xy;
-  vec2 m = u_mouse / u_resolution.xy;
+  vec2 m = u_mouse;
   float t = u_time / 2.0;
   vec3 color = vec3(0.0);
   vec3 color1 = vec3(st.x, sin01(t * 4.0) + m.y, st.y);
