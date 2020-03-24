@@ -43,13 +43,14 @@ const float NUM = 6.0;
 void main() {
   vec2 st = gl_FragCoord.xy / u_resolution.xy;
   float t = u_time / 1.5;
-  vec2 m = u_mouse / u_resolution.xy;
+  vec2 m = u_mouse;
   vec3 color = vec3(0.0);
   vec2 colst = 1.0 - abs(rotate(st - 0.5, -t / 2.0)) * 2.0;
   vec3 color1 = vec3(colst.x, colst.y, sin01(t) + 0.5);
 
   float finalSDF = 99999.9;
   float spread = 0.25 + length(m - 0.5) / 2.0 - 0.25;
+  // float spread = 0.25;
   float bloopiness = 0.45;
   float size = 0.1;
   float overlapSize = 0.1;
