@@ -72,10 +72,11 @@ float sin01(float x) {
 
 void main() {
   vec2 st = gl_FragCoord.xy / u_resolution.xy;
+  vec2 m = u_mouse;
   float t = u_time / 4.0;
   float scale = map(sin01(t), 0.0, 1.0, 0.2, 1.0);
   st = (st - 0.5) / scale + 0.5;
-  vec2 colst = 1.0 - abs(rotate(st - 0.5, 2.0 * PI * t / 4.0)) * 2.0;
+  vec2 colst = 1.0 - abs(rotate(st - 0.5, 2.0 * PI * t / 3.0)) * 2.0;
   vec3 color1 = vec3(colst.x, colst.y, sin01(t + PI/2.0) + 0.5);
   vec3 color = vec3(0.0);
 
@@ -85,14 +86,11 @@ void main() {
   float colorScale = map(sin01(t), 0.0, 1.0, 0.5, 1.0);
   for (float i = 0.0; i < NUM; i += 1.0) {
     float flower = flowerSDF(
-      rotateAboutPoint(st, i * PI/3.0, vec2(0.5)), 
+      rotateAboutPoint(st, i * PI/3.0 + m.x * i, vec2(0.5)), 
       numPetals, 1.5);
     color += stroke(flower, 0.2, 0.03);
     color += fill(flower, 0.2) * 0.4 * colorScale * color1;
   }
-
-  // color = vec3(stroke(flowerSDF(st, 3.0, 2.5), 0.2, 0.1));
-  // color = color1;
 
   gl_FragColor = vec4(color, 1.0);
 }

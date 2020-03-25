@@ -30,7 +30,7 @@
 
     var shaderName = 1;
     if (window.location.search) 
-      shaderName = window.location.search.split("?")[1]
+      shaderName = window.location.search.split("?")[1].split("&")[0]
 
     function loadShader(name) {
       console.log(name);
