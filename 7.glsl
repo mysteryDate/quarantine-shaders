@@ -19,11 +19,6 @@ float smin(float a, float b, float k) {
   return mix(b, a, h) - k*h*(1.0-h);
 }
 
-vec3 bridge(vec3 c, float d, float s, float w) {
-  c *= 1.0 - stroke(d, s, 2.0 * w);
-  return c + stroke(d, s, w);
-}
-
 vec2 rotate(vec2 st, float theta) {
   mat2 rotationMatrix = mat2(cos(theta), -sin(theta), sin(theta), cos(theta));
   return rotationMatrix * st;
@@ -36,19 +31,6 @@ vec2 rotateAboutPoint(vec2 st, float theta, vec2 point) {
 float circleSDF(vec2 st) {
   return length(st - 0.5) * 2.0;
 }
-
-float vesicaSDF(vec2 st, float w) {
-  vec2 offset = vec2(w * 0.5, 0.0);
-  return max(circleSDF(st - offset),
-             circleSDF(st + offset));
-}
-
-const vec2 CENTER = vec2(0.5);
-const float size = 0.45;
-const float strokeWidth = 0.05;
-const float vesicaSlope = 0.3;
-const vec2 offset = vec2(0.0, 0.189);
-// const int numPoints = 11;
 
 float flowerSDF(vec2 st, float N, float ratio) {
   st = 2.0 * st - 1.0;

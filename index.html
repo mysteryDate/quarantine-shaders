@@ -38,9 +38,7 @@
     }
     loadShader(shaderName);
 
-    setTimeout(() => {
-      loadShader(2);
-    }, 3000);
+    window.addEventListener("deviceorientation", handleOrientation, true);
 
   </script>
 </html>
