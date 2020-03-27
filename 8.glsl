@@ -4,9 +4,6 @@ uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
 
-uniform float u_radius;
-uniform vec3 u_test;
-
 #define PI 3.14159
 const float sqrt3over2 = sqrt(3.0)/2.0;
 
