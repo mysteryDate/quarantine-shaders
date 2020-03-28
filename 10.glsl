@@ -53,8 +53,8 @@ const float BLOOPINESS = 0.1;
 const float BORDER_SIZE = 0.005;
 
 void main() {
-  vec2 mouse = u_mouse / u_resolution.xy;
-  vec2 st = gl_FragCoord.xy;
+  vec2 mouse = u_mouse;
+  vec2 st = gl_FragCoord.xy / u_resolution.xy;
   float t = mod(u_time / DURATION, 1.0) * 2.0 * PI;
   st = (map(cos010(t), 0.0, 1.0, 1.0, 2.0) * (st - 0.5)) + 0.5;
   vec3 outputColor = vec3(0.0);

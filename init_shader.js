@@ -56,13 +56,11 @@ function createShaderCanvas(canvas, path) {
   canvas.onmousemove = function(e) {
     const x = (e.clientX - canvas.offsetLeft) / canvas.clientWidth;
     const y = 1.0 - (e.clientY - canvas.offsetTop) / canvas.clientHeight;
-    console.log(x, y);
     gl.uniform2f(gl.getUniformLocation(glProgram, "u_mouse"), x, y);
   }
 
   function handleOrientation(e) {
     const x = e.gamma;
-    console.log(x);
     const y = e.beta;
     gl.uniform2f(gl.getUniformLocation(glProgram, "u_mouse"), x, y);
   }
