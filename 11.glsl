@@ -32,16 +32,6 @@ vec2 rotateAboutPoint(vec2 st, float theta, vec2 point) {
   return rotate(st - point, theta) + point;
 }
 
-float crescent(vec2 st, float size, float ratio, float offsetRatio) {
-  float bigCircle = circleSDF(st);
-  float maxOffset = size / 2.0 + size * ratio / 2.0;
-  float minOffset = size / 2.0 - size * ratio / 2.0;
-  float offset = map(offsetRatio, 0.0, 1.0, minOffset, maxOffset);
-  float smallCircle = circleSDF(st - vec2(1.0, 0.0) * offset);
-
-  return max(fill(bigCircle, size) - fill(smallCircle, size * ratio), 0.0);
-}
-
 float cos010(float x) {
   return (1.0 - cos(x)) / 2.0;
 }
@@ -71,12 +61,23 @@ vec3 hsv2rgb(in vec3 c) {
   return c.z * mix(vec3(1.0), rgb, c.y);
 }
 
+float crescent(vec2 st, float size, float ratio, float offsetRatio) {
+  float bigCircle = circleSDF(st);
+  float maxOffset = size / 2.0 + size * ratio / 2.0;
+  float minOffset = size / 2.0 - size * ratio / 2.0;
+  float offset = map(offsetRatio, 0.0, 1.0, minOffset, maxOffset);
+  float smallCircle = circleSDF(st - vec2(1.0, 0.0) * offset);
+
+  return max(fill(bigCircle, size) - fill(smallCircle, size * ratio), 0.0);
+}
+
 const float DURATION = 10.0;
 void main() {
   vec2 st = gl_FragCoord.xy / u_resolution.xy;
+  vec2 mouse = u_mouse.xy;
   vec3 color = vec3(0.0);
   float t1 = mod(u_time / DURATION, 1.0);
-  // t1 = u_test.x;
+  // t1 = 0.75;
   st = rotateAboutPoint(st, -PI / 8.0, vec2(0.5));
   float t0 = mod(t1 * 2.0, 1.0);
 
@@ -104,6 +105,7 @@ void main() {
 
   // Transitioning to a circle
   float baseRatio = 0.8;
+  baseRatio = mouse.x;
   float ratio = baseRatio;
   float ratioTransitionTime = 0.1;
   if (t1 < ratioTransitionTime) {
