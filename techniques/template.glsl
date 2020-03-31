@@ -10,7 +10,7 @@ uniform float u_time;
 
 float DURATION = 5.0;
 void main() {
-  float time = mod(u_time, 1.0) * DURATION;
+  float time = mod(u_time / DURATION, 1.0);
   vec2 st = gl_FragCoord.xy / u_resolution.xy;
   vec2 mouse = u_mouse.xy;
   vec3 color = vec3(0.0);

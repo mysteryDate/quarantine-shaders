@@ -5,10 +5,6 @@ precision mediump float;
 #define PI 3.141592685
 #define TAU 2.0 * PI
 
-float circleSDF(vec2 st) {
-  return length(st - 0.5) * 2.0;
-}
-
 float fill(float x, float size) {
   return 1.0 - step(size, x);
 }
@@ -29,6 +25,10 @@ vec2 rotate(vec2 st, float theta) {
 
 vec2 rotateAboutPoint(vec2 st, float theta, vec2 point) {
   return rotate(st - point, theta) + point;
+}
+
+vec2 spin(vec2 st, float theta) {
+  return rotateAboutPoint(st, theta, vec2(0.5));
 }
 
 float cos010(float x) {
