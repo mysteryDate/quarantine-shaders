@@ -53,7 +53,7 @@ const float DURATION = 12.0;
 void main() {
     vec2 st = gl_FragCoord.xy / u_resolution.xy;
     float time = mod(u_time / DURATION, 1.0);
-    vec2 mouse = u_mouse.xy / u_resolution.xy;
+    vec2 mouse = u_mouse.xy;
     st = rotateAboutPoint(st, time * TAU, vec2(0.5));
 
     vec3 c1 = vec3(st.x, st.y, cos010(time * TAU));
